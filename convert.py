@@ -1,5 +1,6 @@
 from scipy.io import loadmat
 import pandas as pd
+import numpy as np
 
 matlabfile = loadmat("data_EEG_AI.mat")
 
@@ -13,6 +14,8 @@ channel_label_list = []
 for i in matlabfile['channel_labels']:
     channel_label_list.append(str(list(i[0])[0]))
 print(channel_label_list)
+temp=matlabfile['data']
+
 
 # 2. construct the data_dict
 
@@ -22,15 +25,17 @@ no_of_timepoints = 801
 
 for k, channel_label in enumerate(channel_label_list):
 # for i, element in enumerate(seq):
-    temp_channel_list = []
-    for i in range(0, 26*no_of_sample_per_alphabet):
-        temp_timepoint_list = []
-        for j in range(0, no_of_timepoints):
-            temp_timepoint_list.append(matlabfile["data"][k][j][i])
+    temp_channel_list = np.transpose(np.array(matlabfile["data"][k]))
+    
+    #temp_channel_list = []    
+    #for i in range(0, 26*no_of_sample_per_alphabet):
+    #    temp_timepoint_list = []
+    #    for j in range(0, no_of_timepoints):
+    #        temp_timepoint_list.append(matlabfile["data"][k][j][i])
 
-        temp_channel_list.append(temp_timepoint_list)
+    #    temp_channel_list.append(temp_timepoint_list)
 
-    data_dict[channel_label] = temp_channel_list
+    data_dict[channel_label] = np.ndarray.tolist(temp_channel_list)
     print("Finish 1 channel")
 
 # 3. convert data_dict to a pandas dataframe 
@@ -41,4 +46,4 @@ row2 = pandas_df.iloc[3][0]
 print(len(row2))
 
 # 4. Export the pandas dataframe to be .txt file
-pandas_df.to_csv('data.txt', sep=',')
+#pandas_df.to_csv('data.csv', sep=',')
