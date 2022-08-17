@@ -1,1 +1,1 @@
-# EDG_AI_Competition
+# EEG_AI_Competition
