@@ -1,1 +1,1 @@
-# EGG_AI_Competition
+# EDG_AI_Competition
