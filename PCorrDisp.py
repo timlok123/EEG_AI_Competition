@@ -16,7 +16,7 @@ a=a/300
 
 b=np.zeros((4,4,24))
 
-print(a[0,0,0]+a[0,0,0+1:])
+
 #avg correlation of timezone vs channel
 for i in range(96):
     b[0,i//24,i%24]=np.trace(a[i])/26
