@@ -23,7 +23,7 @@ collection=[[2,4],[2,23],[2, 14],[2, 15],[2,12],[1, 2],[1, 8],[2, 21],[2, 16],[2
 
 #randomizer=np.random.shuffle(np.arange(7800))
 randomizer=np.arange(7800)
-randomizer=np.random.permutation(randomizer)
+randomizer=np.random.RandomState(seed=1).permutation(randomizer)
 temp=np.array([temp[m[1],801//4*m[0]:801//4*(m[0]+1),:]for m in collection])
 label=np.array(([i//300 for i in randomizer]))
 data=np.transpose(np.array(np.take(temp,randomizer,axis=2)),(2,0,1))
